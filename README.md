@@ -1,4 +1,19 @@
-Pizza Rush
-==========
+# clean-architecture-go-version
 
-Just a sample how would it be build a pizza with clean architecture
+## Objetivo:
+
+Criar uma POC contemplando os itens abaixo:
+
+- Entidades:
+
+- Pedido(dono, pizza)
+- Pizza: lista de ingredientes
+- Ingredientes:queijo, calabreza
+
+- Use case:
+
+- listar pizzas
+- criar pedido
+
+Apresentação: API, CLI.
+
