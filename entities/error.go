@@ -1,0 +1,9 @@
+package entity
+
+import "errors"
+
+//NotFoundError not found
+var NotFoundError = errors.New("Not found")
+
+// EmptyNomeError invality empty nome
+var EmptyNomeError = errors.New("Invalid empty nome")
