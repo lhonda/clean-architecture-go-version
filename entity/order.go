@@ -5,13 +5,13 @@ import "time"
 // Order -
 type Order struct {
 	ID        ID
-	Pizza     []Pizza
+	Pizzas    []Pizza
 	Owner     string
 	CreatedAt time.Time
 }
 
-// New NewOrder create a new order
-func NewOrder(owner string, pizza []Pizza) (*Order, error) {
+// NewOrder creates a new order
+func NewOrder(owner string, pizzas []Pizza) (*Order, error) {
 
 	if owner == "" {
 		return nil, EmptyOwnerError
@@ -19,7 +19,8 @@ func NewOrder(owner string, pizza []Pizza) (*Order, error) {
 
 	return &Order{
 		ID:        NewID(),
-		Pizza:     pizza,
+		Owner:     owner,
+		Pizzas:    pizzas,
 		CreatedAt: time.Now(),
 	}, nil
 }

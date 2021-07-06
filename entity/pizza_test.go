@@ -6,12 +6,12 @@ import (
 )
 
 func TestNewPizzaShouldSucceed(t *testing.T) {
-    queijo, _ := NewIngrediente("queijo")
-    calabreza, _ := NewIngrediente("calabreza")
+    queijo, _ := NewIngredient("queijo")
+    calabreza, _ := NewIngredient("calabreza")
 
-    ingredientes := []Ingrediente{*queijo, *calabreza}
-    p, err := NewPizza(ingredientes)
+    ingredients := []Ingredient{*queijo, *calabreza}
+    p, err := NewPizza(ingredients)
     assert.Nil(t, err)
-    assert.Equal(t, p.Ingredientes[0].Nome, "queijo")
+    assert.Equal(t, p.Ingredients[0].Name, "queijo")
     assert.NotNil(t, p.ID)
 }

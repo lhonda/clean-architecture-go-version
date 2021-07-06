@@ -6,17 +6,17 @@ import (
 
 //Pizza data
 type Pizza struct {
-	ID           ID
-	Ingredientes []Ingrediente
-	CreatedAt    time.Time
+	ID          ID
+	Ingredients []Ingredient
+	CreatedAt   time.Time
 }
 
 //NewPizza create a new pizza
-func NewPizza(ingredientes []Ingrediente) (*Pizza, error) {
+func NewPizza(ingredients []Ingredient) (*Pizza, error) {
 	p := &Pizza{
-		ID:           NewID(),
-		Ingredientes: ingredientes,
-		CreatedAt:    time.Now(),
+		ID:          NewID(),
+		Ingredients: ingredients,
+		CreatedAt:   time.Now(),
 	}
 	return p, nil
 }

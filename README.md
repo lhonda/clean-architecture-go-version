@@ -6,14 +6,14 @@ Criar uma POC contemplando os itens abaixo:
 
 - Entidades:
 
-- Pedido(dono, pizza)
+- Order(customer, pizza)
 - Pizza: lista de ingredientes
-- Ingredientes:queijo, calabreza
+- Ingredients:queijo, calabreza
 
 - Use case:
 
 - listar pizzas
-- criar pedido
+- criar Order
 
 Apresentação: API, CLI.
 

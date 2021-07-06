@@ -1,23 +1,23 @@
 package entity
 
 import (
-	"testing"
+    "testing"
 
-	"github.com/stretchr/testify/assert"
+    "github.com/stretchr/testify/assert"
 )
 
 func TestShouldCreateANewPizza(t *testing.T) {
-	queijo, _ := NewIngrediente("queijo")
-	calabreza, _ := NewIngrediente("calabreza")
+    queijo, _ := NewIngredient("queijo")
+    calabreza, _ := NewIngredient("calabreza")
 
-	ingredientes := []Ingrediente{*queijo, *calabreza}
-	pizza, _ := NewPizza(ingredientes)
+    ingredients := []Ingredient{*queijo, *calabreza}
+    pizza, _ := NewPizza(ingredients)
 
-	pizzas := []Pizza{*pizza}
-	order, err := NewOrder("Jukinha", pizzas)
+    pizzas := []Pizza{*pizza}
+    order, err := NewOrder("Jukinha", pizzas)
 
-	assert.Nil(t, err)
-	assert.Equal(
-		t, order.Pizza[0], pizza)
-	assert.NotNil(t, order.ID)
+    assert.Nil(t, err)
+    assert.Equal(
+        t, order.Pizzas[0].ID, pizza.ID)
+    assert.NotNil(t, order.ID)
 }
