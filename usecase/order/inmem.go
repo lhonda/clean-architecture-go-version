@@ -2,7 +2,7 @@ package order
 
 import (
     "github.com/lhonda/clean-architecture-go-version/entity"
-	"sort"
+    "sort"
 )
 
 //InMem in memory repo
@@ -40,9 +40,9 @@ func (r *InMem) Get(id entity.ID) (*entity.Order, error) {
 //List orders
 func (r *InMem) List() ([]*entity.Order, error) {
     var d []*entity.Order
-	for _,j := range r.m {
-		d = append(d, j)
-	}
+    for _, j := range r.m {
+        d = append(d, j)
+    }
     sort.Sort(ByCreatedAt(d))
     return d, nil
 }

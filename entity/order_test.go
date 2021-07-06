@@ -6,7 +6,7 @@ import (
     "github.com/stretchr/testify/assert"
 )
 
-func TestShouldCreateANewPizza(t *testing.T) {
+func TestCreateNewPizza(t *testing.T) {
     queijo, _ := NewIngredient("queijo")
     calabreza, _ := NewIngredient("calabreza")
 
@@ -20,4 +20,18 @@ func TestShouldCreateANewPizza(t *testing.T) {
     assert.Equal(
         t, order.Pizzas[0].ID, pizza.ID)
     assert.NotNil(t, order.ID)
+}
+
+func TestCreateNewPizzaWithEmptyCustomerShouldFail(t *testing.T) {
+    queijo, _ := NewIngredient("queijo")
+    calabreza, _ := NewIngredient("calabreza")
+
+    ingredients := []Ingredient{*queijo, *calabreza}
+    pizza, _ := NewPizza(ingredients)
+
+    pizzas := []Pizza{*pizza}
+    o, err := NewOrder("", pizzas)
+
+    assert.NotNil(t, err)
+    assert.Nil(t, o)
 }

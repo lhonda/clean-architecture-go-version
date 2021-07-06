@@ -28,34 +28,11 @@ func newFixturePizza() []entity.Pizza {
     return []entity.Pizza{*p, *p2}
 }
 
-func newFixtureOrder() *entity.Order {
-    cheese := entity.Ingredient{
-        ID:        entity.NewID(),
-        Name:      "cheese",
-        CreatedAt: time.Now(),
-    }
-
-    ham := entity.Ingredient{
-        ID:        entity.NewID(),
-        Name:      "ham",
-        CreatedAt: time.Now(),
-    }
-
-    p, _ := entity.NewPizza([]entity.Ingredient{ham, cheese})
-    p2, _ := entity.NewPizza([]entity.Ingredient{cheese})
-    return &entity.Order{
-        ID:        entity.NewID(),
-        Owner:     "Dennis",
-        Pizzas:    []entity.Pizza{*p, *p2},
-        CreatedAt: time.Now(),
-    }
-}
-
 func TestCreateOrder(t *testing.T) {
     repo := inMem()
     m := NewService(repo)
     pizzas := newFixturePizza()
-    o, err := m.CreateOrder("Dennis",pizzas)
+    o, err := m.CreateOrder("Dennis", pizzas)
     assert.Nil(t, err)
     assert.NotNil(t, o)
 }
@@ -64,7 +41,7 @@ func TestCreateOrderWithEmptyCustomerShouldFail(t *testing.T) {
     repo := inMem()
     m := NewService(repo)
     pizzas := newFixturePizza()
-    _, err := m.CreateOrder("",pizzas)
+    _, err := m.CreateOrder("", pizzas)
     assert.NotNil(t, err)
 }
 
@@ -86,7 +63,7 @@ func TestListOrders(t *testing.T) {
     })
 }
 
-func Test_GetOrder(t *testing.T) {
+func TestGetOrder(t *testing.T) {
     repo := inMem()
     m := NewService(repo)
     pizzas := newFixturePizza()
@@ -99,4 +76,27 @@ func Test_GetOrder(t *testing.T) {
     assert.Equal(t, saved.Owner, o.Owner)
     assert.NotNil(t, saved.Pizzas)
     assert.Equal(t, saved.Owner, o.Owner)
+}
+
+func TestDeleteOrder(t *testing.T) {
+    repo := inMem()
+    m := NewService(repo)
+    pizzas := newFixturePizza()
+    o, _ := m.CreateOrder("Dennis", pizzas)
+
+    error := m.DeleteOrder(o.ID)
+
+    assert.Nil(t, error)
+    all, error := m.ListOrders()
+    assert.Nil(t, error)
+    assert.Equal(t, 0, len(all))
+}
+
+func TestDeleteOrderWithNonExistingOrderShouldFail(t *testing.T) {
+    repo := inMem()
+    m := NewService(repo)
+    nonExistentID := entity.NewID()
+    error := m.DeleteOrder(nonExistentID)
+
+    assert.NotNil(t, error)
 }
