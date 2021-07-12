@@ -26,3 +26,6 @@ _testmain.go
 
 # Enviroment
 .env
+
+# cover
+coverage.out
