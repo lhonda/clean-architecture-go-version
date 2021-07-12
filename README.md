@@ -1,3 +1,4 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/lhonda/clean-architecture-go-version)](https://goreportcard.com/report/github.com/lhonda/clean-architecture-go-version)
 # clean-architecture-go-version
 
 ## Objetivo:
