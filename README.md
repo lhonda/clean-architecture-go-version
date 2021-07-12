@@ -9,16 +9,18 @@ Criar uma POC contemplando os itens abaixo:
 
 - Entidades:
 
-- Order(customer, pizza)
-- Pizza: lista de ingredientes
-- Ingredients:queijo, calabreza
+- [x] Order(customer, pizza)
+- [x] Pizza: lista de ingredientes
+- [x] Ingredients:queijo, calabreza
 
 - Use case:
 
-- listar pizzas
-- criar Order
+- [x] listar pizzas
+- [x] criar Order
 
 - Controller
+- [ ] API
+- [ ] CLI
 
 - Framework/Drivers
 
