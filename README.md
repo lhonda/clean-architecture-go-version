@@ -3,6 +3,8 @@
 
 ## Objetivo:
 
+Este repositório é baseado no https://github.com/eminetto/clean-architecture-go-v2.
+
 Criar uma POC contemplando os itens abaixo:
 
 - Entidades:
@@ -15,6 +17,14 @@ Criar uma POC contemplando os itens abaixo:
 
 - listar pizzas
 - criar Order
+
+- Controller
+
+- Framework/Drivers
+
+- Cobra (https://github.com/spf13/cobra)
+- Fiber (https://github.com/gofiber/fiber)
+
 
 Apresentação: API, CLI.
 

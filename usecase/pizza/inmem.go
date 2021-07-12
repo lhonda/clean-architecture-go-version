@@ -1,15 +1,16 @@
-package order
+package pizza
 
 import (
-	"github.com/lhonda/clean-architecture-go-version/entity"
 	"sort"
+
+	"github.com/lhonda/clean-architecture-go-version/entity"
 )
 
 //InMem in memory repo
 type InMem struct {
-	m map[entity.ID]*entity.Order
+	m map[entity.ID]*entity.Pizza
 }
-type ByCreatedAt []*entity.Order
+type ByCreatedAt []*entity.Pizza
 
 func (a ByCreatedAt) Len() int           { return len(a) }
 func (a ByCreatedAt) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
@@ -17,29 +18,29 @@ func (a ByCreatedAt) Less(i, j int) bool { return a[i].CreatedAt.Unix() < a[j].C
 
 //inMem create new repository
 func inMem() *InMem {
-	var m = map[entity.ID]*entity.Order{}
+	var m = map[entity.ID]*entity.Pizza{}
 	return &InMem{
 		m: m,
 	}
 }
 
-//Create an Order
-func (r *InMem) Create(e *entity.Order) (*entity.Order, error) {
+//Create an Pizza
+func (r *InMem) Create(e *entity.Pizza) (*entity.Pizza, error) {
 	r.m[e.ID] = e
 	return e, nil
 }
 
-//Get an order
-func (r *InMem) Get(id entity.ID) (*entity.Order, error) {
+//Get an Pizza
+func (r *InMem) Get(id entity.ID) (*entity.Pizza, error) {
 	if r.m[id] == nil {
 		return nil, entity.NotFoundError
 	}
 	return r.m[id], nil
 }
 
-//List orders
-func (r *InMem) List() ([]*entity.Order, error) {
-	var d []*entity.Order
+//List Pizzas
+func (r *InMem) List() ([]*entity.Pizza, error) {
+	var d []*entity.Pizza
 	for _, j := range r.m {
 		d = append(d, j)
 	}
@@ -47,7 +48,7 @@ func (r *InMem) List() ([]*entity.Order, error) {
 	return d, nil
 }
 
-// Delete order
+// Delete Pizza
 func (r *InMem) Delete(id entity.ID) error {
 	_, found := r.m[id]
 	if found {

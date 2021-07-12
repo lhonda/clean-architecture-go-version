@@ -1,4 +1,4 @@
-package order
+package pizza
 
 import (
 	"testing"
@@ -28,33 +28,51 @@ func newFixturePizza() []entity.Pizza {
 	return []entity.Pizza{*p, *p2}
 }
 
-func TestCreateOrder(t *testing.T) {
+func newFixtureIngredients() []entity.Ingredient {
+	cheese := entity.Ingredient{
+		ID:        entity.NewID(),
+		Name:      "cheese",
+		CreatedAt: time.Now(),
+	}
+
+	ham := entity.Ingredient{
+		ID:        entity.NewID(),
+		Name:      "ham",
+		CreatedAt: time.Now(),
+	}
+
+	return []entity.Ingredient{cheese, ham}
+}
+
+func TestCreatePizza(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
-	pizzas := newFixturePizza()
-	o, err := m.CreateOrder("Dennis", pizzas)
+	ingredients := newFixtureIngredients()
+	o, err := m.CreatePizza(ingredients)
+
 	assert.Nil(t, err)
 	assert.NotNil(t, o)
 }
 
-func TestCreateOrderWithEmptyCustomerShouldFail(t *testing.T) {
+func TestCreatePizzaWithEmptyIngredientsShouldFail(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
-	pizzas := newFixturePizza()
-	_, err := m.CreateOrder("", pizzas)
+	_, err := m.CreatePizza(nil)
+
 	assert.NotNil(t, err)
+	assert.EqualError(t, err, "Empty Ingredients list")
 }
 
-func TestListOrders(t *testing.T) {
+func TestListPizzas(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
-	pizzas := newFixturePizza()
+	ingredients := newFixtureIngredients()
 
-	u1, _ := m.CreateOrder("Dennis", pizzas)
-	u2, _ := m.CreateOrder("Dennis", pizzas)
+	u1, _ := m.CreatePizza(ingredients)
+	u2, _ := m.CreatePizza(ingredients)
 
 	t.Run("list all", func(t *testing.T) {
-		all, err := m.ListOrders()
+		all, err := m.ListPizzas()
 
 		assert.Nil(t, err)
 		assert.Equal(t, 2, len(all))
@@ -63,40 +81,39 @@ func TestListOrders(t *testing.T) {
 	})
 }
 
-func TestGetOrder(t *testing.T) {
+func TestGetpizza(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
-	pizzas := newFixturePizza()
-	o, _ := m.CreateOrder("Dennis", pizzas)
+	ingredients := newFixtureIngredients()
+	o, _ := m.CreatePizza(ingredients)
 
-	saved, _ := m.GetOrder(o.ID)
+	saved, _ := m.GetPizza(o.ID)
 
 	assert.Equal(t, saved.ID, o.ID)
 	assert.NotNil(t, saved.CreatedAt)
-	assert.Equal(t, saved.Owner, o.Owner)
-	assert.NotNil(t, saved.Pizzas)
-	assert.Equal(t, saved.Owner, o.Owner)
+	assert.NotNil(t, saved.Ingredients)
 }
 
-func TestDeleteOrder(t *testing.T) {
+func TestDeletepizza(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
-	pizzas := newFixturePizza()
-	o, _ := m.CreateOrder("Dennis", pizzas)
+	ingredients := newFixtureIngredients()
 
-	error := m.DeleteOrder(o.ID)
+	o, _ := m.CreatePizza(ingredients)
+
+	error := m.DeletePizza(o.ID)
 
 	assert.Nil(t, error)
-	all, error := m.ListOrders()
+	all, error := m.ListPizzas()
 	assert.Nil(t, error)
 	assert.Equal(t, 0, len(all))
 }
 
-func TestDeleteOrderWithNonExistingOrderShouldFail(t *testing.T) {
+func TestDeletepizzaWithNonExistingpizzaShouldFail(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
 	nonExistentID := entity.NewID()
-	error := m.DeleteOrder(nonExistentID)
+	error := m.DeletePizza(nonExistentID)
 
 	assert.NotNil(t, error)
 }

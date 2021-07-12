@@ -7,11 +7,11 @@ type ID = uuid.UUID
 
 //NewID create a new entity ID
 func NewID() ID {
-    return ID(uuid.New())
+	return ID(uuid.New())
 }
 
 //StringToID convert a string to an entity ID
 func StringToID(s string) (ID, error) {
-    id, err := uuid.Parse(s)
-    return ID(id), err
+	id, err := uuid.Parse(s)
+	return ID(id), err
 }
