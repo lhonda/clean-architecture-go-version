@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import (
 	"fmt"
@@ -8,9 +8,15 @@ import (
 )
 
 var RootCmd = &cobra.Command{
-	User: "Pizza order.",
+	Use: "Pizza order.",
 	Short: "cli version to set your order",
-	Long: "cli version to set your order and list."
+	Long: "cli version to set your order and list.",
+	Run: func(cmd *cobra.Command, args []string) {
+		if err := someFunc(); err != nil {
+			return err
+		}
+		return nil
+	},
 }
 
 

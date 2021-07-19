@@ -14,7 +14,7 @@ type Ingredient struct {
 //NewIngredient create a new ingredient
 func NewIngredient(name string) (*Ingredient, error) {
 	if name == "" {
-		return nil, EmptyNomeError
+		return nil, EmptyNameError
 	}
 
 	i := &Ingredient{
