@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import (
 	"fmt"
@@ -7,14 +7,15 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// RootCmd - 
 var RootCmd = &cobra.Command{
-	User: "Pizza order.",
+	Use: "Pizza order.",
 	Short: "cli version to set your order",
-	Long: "cli version to set your order and list."
+	Long: `cli version to set your order and list.`,
 }
 
 
-func Execute() {
+func main() {
 	if err := RootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
