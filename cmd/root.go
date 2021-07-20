@@ -7,11 +7,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// RootCmd - 
+// RootCmd -
 var RootCmd = &cobra.Command{
 	Use: "Pizza order.",
 	Short: "cli version to set your order",
 	Long: `cli version to set your order and list.`,
+
 }
 
 

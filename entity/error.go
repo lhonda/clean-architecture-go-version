@@ -5,10 +5,10 @@ import "errors"
 //NotFoundError not found
 var NotFoundError = errors.New("Not found")
 
-// EmptyNomeError invality empty nome
-var EmptyNomeError = errors.New("Invalid empty nome")
+// EmptyNameError invalid empty name
+var EmptyNameError = errors.New("Invalid empty name")
 
-// EmptyNomeError
+// EmptyOwnerError
 var EmptyOwnerError = errors.New("Invalid empty owner")
 
 // EmptyIngredientsListError
