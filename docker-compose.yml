@@ -1,0 +1,18 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password --init-file /data/application/init.sql
+    volumes:
+      - ./ops/db/init.sql:/data/application/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: clean_architecture_go_version
+      MYSQL_DATABASE: clean_architecture_go_version
+      MYSQL_USER: clean_architecture_go_version
+      MYSQL_PASSWORD: clean_architecture_go_version
+    ports:
+      - "3306:3306"
+    container_name: clean-architecture-go-version-mysql
+  cli:
+    image: golang:1.16.6
+    command: /bin/bash
