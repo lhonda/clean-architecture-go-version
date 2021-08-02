@@ -20,7 +20,7 @@ func NewPizzaMySQL(db *sql.DB) *PizzaMySQL {
 
 //Create a pizza
 func (r *PizzaMySQL) Create(e *entity.Pizza) (entity.ID, error) {
-    stmt, err := r.db.Prepare(`insert into pizza (id, name ,ingredients, created_at) 
+    stmt, err := r.db.Prepare(`insert into pizza (id, name ,ingredients, order_id, created_at) 
 		values(?,?,?,?)`)
     if err != nil {
         return e.ID, err
@@ -43,7 +43,7 @@ func (r *PizzaMySQL) Create(e *entity.Pizza) (entity.ID, error) {
 
 //Get a pizza
 func (r *PizzaMySQL) Get(id entity.ID) (*entity.Pizza, error) {
-    stmt, err := r.db.Prepare(`select id,name, ingredients , created_at from pizza where id = ?`)
+    stmt, err := r.db.Prepare(`select id,name, ingredients ,order_id, created_at from pizza where id = ?`)
     if err != nil {
         return nil, err
     }
@@ -60,7 +60,7 @@ func (r *PizzaMySQL) Get(id entity.ID) (*entity.Pizza, error) {
 
 //List pizzas
 func (r *PizzaMySQL) List() ([]*entity.Pizza, error) {
-    stmt, err := r.db.Prepare(`select id, name, ingredients, created_at from pizza`)
+    stmt, err := r.db.Prepare(`select id, name, ingredients,order_id, created_at from pizza`)
     if err != nil {
         return nil, err
     }
