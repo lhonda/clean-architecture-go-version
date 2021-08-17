@@ -31,7 +31,7 @@ func (r *OrderMySQL) Create(e *entity.Order) (entity.ID, error) {
 	)
 
 	// insert Pizza IDs into relation table
-	stmt, err = r.db.Prepare(`insert into pizza (id, name, ingredients, order_id, create_at) values(?,?,?,?,?)`)
+	stmt, err = r.db.Prepare(`insert into pizza (id, name, ingredients, order_id, created_at) values(?,?,?,?,?)`)
 	if err != nil {
 		return e.ID, err
 	}
@@ -68,7 +68,7 @@ func (r *OrderMySQL) Get(id entity.ID) (*entity.Order, error) {
 		err = rows.Scan(&b.ID, &b.Owner, &b.CreatedAt)
 	}
 
-	stmt, err = r.db.Prepare(`select id,name, ingredients, order_id, create_at from pizza where order_id = ?`)
+	stmt, err = r.db.Prepare(`select id,name, ingredients, order_id, created_at from pizza where order_id = ?`)
 	if err != nil {
 		return nil, err
 	}

@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"fmt"
@@ -26,7 +26,7 @@ func init() {
 	dataSourceName = fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?parseTime=true", DB_USER, DB_PASSWORD, DB_HOST, "clean_arch")
 }
 
-func main() {
+func Execute() {
 	if err := RootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
