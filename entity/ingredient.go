@@ -1,6 +1,9 @@
 package entity
 
-import "time"
+import (
+	"github.com/lhonda/clean-architecture-go-version/entity"
+	"time"
+)
 
 //Ingredient data
 type Ingredient struct {
@@ -16,7 +19,9 @@ func NewIngredient(name string) (*Ingredient, error) {
 	}
 
 	i := &Ingredient{
+		ID: entity.NewID(),
 		Name: name,
+		CreatedAt: time.Now(),
 	}
 	return i, nil
 }
