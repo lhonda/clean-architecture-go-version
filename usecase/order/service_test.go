@@ -2,7 +2,6 @@ package order
 
 import (
 	"testing"
-	"time"
 
 	"github.com/lhonda/clean-architecture-go-version/entity"
 
@@ -11,19 +10,15 @@ import (
 
 func newFixturePizza() []entity.Pizza {
 	cheese := entity.Ingredient{
-		ID:        entity.NewID(),
-		Name:      "cheese",
-		CreatedAt: time.Now(),
+		Name: "cheese",
 	}
 
 	ham := entity.Ingredient{
-		ID:        entity.NewID(),
-		Name:      "ham",
-		CreatedAt: time.Now(),
+		Name: "ham",
 	}
 
-	p, _ := entity.NewPizza([]entity.Ingredient{ham, cheese})
-	p2, _ := entity.NewPizza([]entity.Ingredient{cheese})
+	p, _ := entity.NewPizza("queijo", []entity.Ingredient{ham, cheese}, entity.NewID())
+	p2, _ := entity.NewPizza("ham", []entity.Ingredient{cheese}, entity.NewID())
 
 	return []entity.Pizza{*p, *p2}
 }

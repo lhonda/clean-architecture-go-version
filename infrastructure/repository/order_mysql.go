@@ -18,7 +18,7 @@ func NewOrderMySQL(db *sql.DB) *OrderMySQL {
 }
 
 //Create an order
-func (r *OrderMySQL) Create(e *entity.Order) (*entity.Order, error) {
+func (r *OrderMySQL) Create(e *entity.Order) (*entity.ID, error) {
 	stmt, err := r.db.Prepare(`insert into order (id, owner, created_at) 
 		values(?,?,?)`)
 	if err != nil {
@@ -33,7 +33,7 @@ func (r *OrderMySQL) Create(e *entity.Order) (*entity.Order, error) {
 	// insert Pizza IDs into relation table
 	stmt, err = r.db.Prepare(`insert into pizza (id, name, ingredients, order_id, created_at) values(?,?,?,?,?)`)
 	if err != nil {
-		return e, err
+		return nil, err
 	}
 
 	for _, p := range e.Pizzas {
@@ -48,9 +48,9 @@ func (r *OrderMySQL) Create(e *entity.Order) (*entity.Order, error) {
 
 	err = stmt.Close()
 	if err != nil {
-		return e, err
+		return &e.ID, err
 	}
-	return e, nil
+	return &e.ID, nil
 }
 
 //Get an order

@@ -34,7 +34,7 @@ func NewPizza(name string, ingredients []Ingredient, orderId ID) (*Pizza, error)
 func (p *Pizza) GetIngredientsAsString() string {
 	var acc []string
 	for _, ingredient := range p.Ingredients {
-		acc = append(acc, ingredient.Name)
+		acc = append(acc, string(ingredient))
 	}
 
 	return strings.Join(acc, ";")
@@ -43,8 +43,7 @@ func (p *Pizza) GetIngredientsAsString() string {
 // SetIngredientsAsList function
 func (p *Pizza) SetIngredientsAsList(ingredients string) *Pizza {
 	for _, ingredient := range strings.Split(ingredients, ";") {
-		newIngredient, _ := NewIngredient(ingredient)
-		p.Ingredients = append(p.Ingredients, *newIngredient)
+		p.Ingredients = append(p.Ingredients, Ingredient(ingredient))
 	}
 	return p
 }

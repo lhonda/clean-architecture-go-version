@@ -3,13 +3,13 @@ package entity
 import "errors"
 
 //NotFoundError not found
-var NotFoundError = errors.New("Not found")
+var NotFoundError = errors.New("not found")
 
 // EmptyNameError invalid empty name
-var EmptyNameError = errors.New("Invalid empty name")
+var EmptyNameError = errors.New("invalid empty name")
 
-// EmptyOwnerError
-var EmptyOwnerError = errors.New("Invalid empty owner")
+// EmptyOwnerError empty owner
+var EmptyOwnerError = errors.New("invalid empty owner")
 
-// EmptyIngredientsListError
-var EmptyIngredientsListError = errors.New("Empty Ingredients list")
+// EmptyIngredientsListError empty ingredients
+var EmptyIngredientsListError = errors.New("empty Ingredients list")

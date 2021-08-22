@@ -1,54 +1,28 @@
 package pizza
 
 import (
-	"testing"
-	"time"
-
 	"github.com/lhonda/clean-architecture-go-version/entity"
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func newFixturePizza() []entity.Pizza {
-	cheese := entity.Ingredient{
-		ID:        entity.NewID(),
-		Name:      "cheese",
-		CreatedAt: time.Now(),
-	}
-
-	ham := entity.Ingredient{
-		ID:        entity.NewID(),
-		Name:      "ham",
-		CreatedAt: time.Now(),
-	}
-
-	p, _ := entity.NewPizza([]entity.Ingredient{ham, cheese})
-	p2, _ := entity.NewPizza([]entity.Ingredient{cheese})
+	p, _ := entity.NewPizza("presunto", []entity.Ingredient{{"ham"}, {"cheese"}}, entity.NewID())
+	p2, _ := entity.NewPizza("queijo", []entity.Ingredient{{"cheese"}}, entity.NewID())
 
 	return []entity.Pizza{*p, *p2}
 }
 
 func newFixtureIngredients() []entity.Ingredient {
-	cheese := entity.Ingredient{
-		ID:        entity.NewID(),
-		Name:      "cheese",
-		CreatedAt: time.Now(),
-	}
-
-	ham := entity.Ingredient{
-		ID:        entity.NewID(),
-		Name:      "ham",
-		CreatedAt: time.Now(),
-	}
-
-	return []entity.Ingredient{cheese, ham}
+	return []entity.Ingredient{{"cheese"}, {"ham"}}
 }
 
 func TestCreatePizza(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
 	ingredients := newFixtureIngredients()
-	o, err := m.CreatePizza(ingredients)
+	o, err := m.CreatePizza("queijo", ingredients, entity.NewID())
 
 	assert.Nil(t, err)
 	assert.NotNil(t, o)
@@ -57,7 +31,7 @@ func TestCreatePizza(t *testing.T) {
 func TestCreatePizzaWithEmptyIngredientsShouldFail(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
-	_, err := m.CreatePizza(nil)
+	_, err := m.CreatePizza("queijo", nil, entity.NewID())
 
 	assert.NotNil(t, err)
 	assert.EqualError(t, err, "Empty Ingredients list")
@@ -68,8 +42,8 @@ func TestListPizzas(t *testing.T) {
 	m := NewService(repo)
 	ingredients := newFixtureIngredients()
 
-	u1, _ := m.CreatePizza(ingredients)
-	u2, _ := m.CreatePizza(ingredients)
+	u1, _ := m.CreatePizza("queijo", ingredients, entity.NewID())
+	u2, _ := m.CreatePizza("queijo", ingredients, entity.NewID())
 
 	t.Run("list all", func(t *testing.T) {
 		all, err := m.ListPizzas()
@@ -81,11 +55,11 @@ func TestListPizzas(t *testing.T) {
 	})
 }
 
-func TestGetpizza(t *testing.T) {
+func TestGetPizza(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
 	ingredients := newFixtureIngredients()
-	o, _ := m.CreatePizza(ingredients)
+	o, _ := m.CreatePizza("queijo", ingredients, entity.NewID())
 
 	saved, _ := m.GetPizza(o.ID)
 
@@ -98,8 +72,7 @@ func TestDeletepizza(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
 	ingredients := newFixtureIngredients()
-
-	o, _ := m.CreatePizza(ingredients)
+	o, _ := m.CreatePizza("queijo", ingredients, entity.NewID())
 
 	error := m.DeletePizza(o.ID)
 
