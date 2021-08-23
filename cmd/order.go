@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"clean-architecture-go-version/usecase/pizza"
 	"database/sql"
 	"fmt"
 	"github.com/lhonda/clean-architecture-go-version/config"
@@ -32,16 +33,19 @@ var createOrder = &cobra.Command{
 
 		repo := repository.NewOrderMySQL(db)
 
-		service := order.NewService(repo)
+		orderService := order.NewService(repo)
+
+		pizzaService := pizza.NewService(repo)
 
 		owner := args[0]
 		pizzaNames := args[1]
 		ps := strings.Split(pizzaNames, "=")
 		var pizzas []entity.Pizza
 		for _, p := range ps {
-			pizzas = append(pizzas, )
+			pizza,_ := pizzaService.GetPizzaByName(p)
+			pizzas = append(pizzas, *pizza)
 		}
-		newOrder, err := service.CreateOrder(owner, pizzas)
+		newOrder, err := orderService.CreateOrder(owner, pizzas)
 		if err != nil {
 			log.Fatal(err.Error())
 		}

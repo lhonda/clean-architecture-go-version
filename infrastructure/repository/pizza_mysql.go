@@ -58,6 +58,23 @@ func (r *PizzaMySQL) Get(id entity.ID) (*entity.Pizza, error) {
 	return &b, nil
 }
 
+// GetByName Get a pizza by name
+func (r *PizzaMySQL) GetByName(name string) (*entity.Pizza, error) {
+	stmt, err := r.db.Prepare(`select id,name, ingredients ,order_id, created_at from pizza where name = ?`)
+	if err != nil {
+		return nil, err
+	}
+	var b entity.Pizza
+	rows, err := stmt.Query(name)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		err = rows.Scan(&b.ID, &b.Name, &b.Ingredients, &b.CreatedAt)
+	}
+	return &b, nil
+}
+
 //List pizzas
 func (r *PizzaMySQL) List() ([]*entity.Pizza, error) {
 	stmt, err := r.db.Prepare(`select id, name, ingredients,order_id, created_at from pizza`)

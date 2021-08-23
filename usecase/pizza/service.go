@@ -30,6 +30,11 @@ func (s *Service) GetPizza(id entity.ID) (*entity.Pizza, error) {
 	return s.repo.Get(id)
 }
 
+//GetPizzaByName retrieves an Pizza given the ID
+func (s *Service) GetPizzaByName(name string) (*entity.Pizza, error) {
+	return s.repo.GetByName(name)
+}
+
 //ListPizzas List Pizzas
 func (s *Service) ListPizzas() ([]*entity.Pizza, error) {
 	return s.repo.List()
