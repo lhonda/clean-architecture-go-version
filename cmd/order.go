@@ -1,13 +1,13 @@
 package cmd
 
 import (
-	"clean-architecture-go-version/usecase/pizza"
 	"database/sql"
 	"fmt"
 	"github.com/lhonda/clean-architecture-go-version/config"
 	"github.com/lhonda/clean-architecture-go-version/entity"
 	"github.com/lhonda/clean-architecture-go-version/infrastructure/repository"
 	"github.com/lhonda/clean-architecture-go-version/usecase/order"
+	"github.com/lhonda/clean-architecture-go-version/usecase/pizza"
 	"github.com/spf13/cobra"
 	"log"
 	"strings"
@@ -42,7 +42,7 @@ var createOrder = &cobra.Command{
 		ps := strings.Split(pizzaNames, "=")
 		var pizzas []entity.Pizza
 		for _, p := range ps {
-			pizza,_ := pizzaService.GetPizzaByName(p)
+			pizza, _ := pizzaService.GetPizzaByName(p)
 			pizzas = append(pizzas, *pizza)
 		}
 		newOrder, err := orderService.CreateOrder(owner, pizzas)

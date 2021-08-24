@@ -42,7 +42,7 @@ func (r *InMem) Get(id entity.ID) (*entity.Pizza, error) {
 func (r *InMem) GetByName(name string) (*entity.Pizza, error) {
 	for _, p := range r.m {
 		if p.Name == name {
-			return p,nil
+			return p, nil
 		}
 	}
 	return nil, entity.NotFoundError
