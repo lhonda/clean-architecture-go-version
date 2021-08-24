@@ -19,6 +19,8 @@
 -- Table structure for table `order`
 --
 
+use clean_architecture_go_version;
+
 DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -28,7 +30,7 @@ CREATE TABLE `order`
     `owner`      varchar(255) DEFAULT NULL,
     `created_at` timestamp NULL DEFAULT NULL,
     UNIQUE KEY `order_id_uindex` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,7 +59,7 @@ CREATE TABLE `pizza`
     `order_id`    varchar(32)  DEFAULT NULL,
     `created_at`  timestamp NULL DEFAULT NULL,
     UNIQUE KEY `pizza_id_uindex` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,6 +82,6 @@ TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-insert into pizza(id,name, ingredients, order_id) values ("4c7966aa-33dd-4e5a-8038-46bd34d21e9f","queijo","queijo;molho","4c7966aa-33dd-4e5a-8038-46bd34d21e9d");
-insert into pizza(id,name, ingredients, order_id) values ("4c7966aa-33dd-3e5a-8038-46bd34d21e9f","presunto","presunto;molho","4c7966aa-33dd-4e5a-8038-46bd34d21e92");
+insert into pizza(id,name, ingredients, order_id) values ("4c7966aa33dd4e5a803846bd34d21e9f","queijo","queijo;molho","4c7966aa33dd4e5a803846bd34d21e9d");
+insert into pizza(id,name, ingredients, order_id) values ("4c7966aa33dd3e5a803846bd34d21e9f","presunto","presunto;molho","4c7966aa33dd4e5a803846bd34d21e92");
 -- Dump completed on 2021-08-11 16:44:00
