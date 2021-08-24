@@ -12,4 +12,4 @@ var EmptyNameError = errors.New("invalid empty name")
 var EmptyOwnerError = errors.New("invalid empty owner")
 
 // EmptyIngredientsListError empty ingredients
-var EmptyIngredientsListError = errors.New("empty Ingredients list")
+var EmptyIngredientsListError = errors.New("Empty ingredients list")

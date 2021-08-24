@@ -7,15 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func newFixturePizza() []entity.Pizza {
-	p, _ := entity.NewPizza("presunto", []entity.Ingredient{{"ham"}, {"cheese"}}, entity.NewID())
-	p2, _ := entity.NewPizza("queijo", []entity.Ingredient{{"cheese"}}, entity.NewID())
-
-	return []entity.Pizza{*p, *p2}
-}
-
 func newFixtureIngredients() []entity.Ingredient {
-	return []entity.Ingredient{{"cheese"}, {"ham"}}
+	return []entity.Ingredient{"cheese", "ham"}
 }
 
 func TestCreatePizza(t *testing.T) {
@@ -34,7 +27,7 @@ func TestCreatePizzaWithEmptyIngredientsShouldFail(t *testing.T) {
 	_, err := m.CreatePizza("queijo", nil, entity.NewID())
 
 	assert.NotNil(t, err)
-	assert.EqualError(t, err, "Empty Ingredients list")
+	assert.EqualError(t, err, "Empty ingredients list")
 }
 
 func TestListPizzas(t *testing.T) {
@@ -68,17 +61,17 @@ func TestGetPizza(t *testing.T) {
 	assert.NotNil(t, saved.Ingredients)
 }
 
-func TestDeletepizza(t *testing.T) {
+func TestDeletePizza(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
 	ingredients := newFixtureIngredients()
 	o, _ := m.CreatePizza("queijo", ingredients, entity.NewID())
 
-	error := m.DeletePizza(o.ID)
+	err := m.DeletePizza(o.ID)
 
-	assert.Nil(t, error)
-	all, error := m.ListPizzas()
-	assert.Nil(t, error)
+	assert.Nil(t, err)
+	all, err := m.ListPizzas()
+	assert.Nil(t, err)
 	assert.Equal(t, 0, len(all))
 }
 
@@ -86,7 +79,7 @@ func TestDeletepizzaWithNonExistingpizzaShouldFail(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
 	nonExistentID := entity.NewID()
-	error := m.DeletePizza(nonExistentID)
+	err := m.DeletePizza(nonExistentID)
 
-	assert.NotNil(t, error)
+	assert.NotNil(t, err)
 }
