@@ -33,7 +33,7 @@ func (r *OrderMySQL) Create(e *entity.Order) (*entity.Order, error) {
 	// insert Pizza IDs into relation table
 	stmt, err = r.db.Prepare(`insert into pizza (id, name, ingredients, order_id, created_at) values(?,?,?,?,?)`)
 	if err != nil {
-		return e, err
+		return nil, err
 	}
 
 	for _, p := range e.Pizzas {
@@ -48,7 +48,7 @@ func (r *OrderMySQL) Create(e *entity.Order) (*entity.Order, error) {
 
 	err = stmt.Close()
 	if err != nil {
-		return e, err
+		return nil, err
 	}
 	return e, nil
 }

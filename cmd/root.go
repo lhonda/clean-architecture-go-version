@@ -10,15 +10,14 @@ import (
 // RootCmd -
 var (
 	RootCmd = &cobra.Command{
-	Use: "Pizza order.",
-	Short: "cli version to set your order",
-	Long: `cli version to set your order and list.`,
+		Use:   "Pizza order.",
+		Short: "cli version to set your order",
+		Long:  `cli version to set your order and list.`,
+	}
 
-}
-
-	DB_USER string
-	DB_PASSWORD string
-	DB_HOST string
+	DB_USER        string
+	DB_PASSWORD    string
+	DB_HOST        string
 	dataSourceName string
 )
 

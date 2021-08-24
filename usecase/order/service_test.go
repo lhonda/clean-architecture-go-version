@@ -2,7 +2,6 @@ package order
 
 import (
 	"testing"
-	"time"
 
 	"github.com/lhonda/clean-architecture-go-version/entity"
 
@@ -10,20 +9,8 @@ import (
 )
 
 func newFixturePizza() []entity.Pizza {
-	cheese := entity.Ingredient{
-		ID:        entity.NewID(),
-		Name:      "cheese",
-		CreatedAt: time.Now(),
-	}
-
-	ham := entity.Ingredient{
-		ID:        entity.NewID(),
-		Name:      "ham",
-		CreatedAt: time.Now(),
-	}
-
-	p, _ := entity.NewPizza([]entity.Ingredient{ham, cheese})
-	p2, _ := entity.NewPizza([]entity.Ingredient{cheese})
+	p, _ := entity.NewPizza("queijo", []entity.Ingredient{"ham", "cheese"}, entity.NewID())
+	p2, _ := entity.NewPizza("ham", []entity.Ingredient{"cheese"}, entity.NewID())
 
 	return []entity.Pizza{*p, *p2}
 }
@@ -84,11 +71,11 @@ func TestDeleteOrder(t *testing.T) {
 	pizzas := newFixturePizza()
 	o, _ := m.CreateOrder("Dennis", pizzas)
 
-	error := m.DeleteOrder(o.ID)
+	err := m.DeleteOrder(o.ID)
 
-	assert.Nil(t, error)
-	all, error := m.ListOrders()
-	assert.Nil(t, error)
+	assert.Nil(t, err)
+	all, err := m.ListOrders()
+	assert.Nil(t, err)
 	assert.Equal(t, 0, len(all))
 }
 
@@ -96,7 +83,7 @@ func TestDeleteOrderWithNonExistingOrderShouldFail(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
 	nonExistentID := entity.NewID()
-	error := m.DeleteOrder(nonExistentID)
+	err := m.DeleteOrder(nonExistentID)
 
-	assert.NotNil(t, error)
+	assert.NotNil(t, err)
 }

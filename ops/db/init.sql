@@ -22,11 +22,12 @@
 DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `order` (
-  `id` varchar(32) DEFAULT NULL,
-  `owner` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  UNIQUE KEY `order_id_uindex` (`id`)
+CREATE TABLE `order`
+(
+    `id`         varchar(32)  DEFAULT NULL,
+    `owner`      varchar(255) DEFAULT NULL,
+    `created_at` timestamp NULL DEFAULT NULL,
+    UNIQUE KEY `order_id_uindex` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -34,10 +35,12 @@ CREATE TABLE `order` (
 -- Dumping data for table `order`
 --
 
-LOCK TABLES `order` WRITE;
+LOCK
+TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
-UNLOCK TABLES;
+UNLOCK
+TABLES;
 
 --
 -- Table structure for table `pizza`
@@ -46,13 +49,14 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `pizza`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pizza` (
-  `id` varchar(32) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `ingredients` varchar(255) DEFAULT NULL,
-  `order_id` varchar(32) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  UNIQUE KEY `pizza_id_uindex` (`id`)
+CREATE TABLE `pizza`
+(
+    `id`          varchar(32)  DEFAULT NULL,
+    `name`        varchar(255) DEFAULT NULL,
+    `ingredients` varchar(255) DEFAULT NULL,
+    `order_id`    varchar(32)  DEFAULT NULL,
+    `created_at`  timestamp NULL DEFAULT NULL,
+    UNIQUE KEY `pizza_id_uindex` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -60,10 +64,12 @@ CREATE TABLE `pizza` (
 -- Dumping data for table `pizza`
 --
 
-LOCK TABLES `pizza` WRITE;
+LOCK
+TABLES `pizza` WRITE;
 /*!40000 ALTER TABLE `pizza` DISABLE KEYS */;
 /*!40000 ALTER TABLE `pizza` ENABLE KEYS */;
-UNLOCK TABLES;
+UNLOCK
+TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

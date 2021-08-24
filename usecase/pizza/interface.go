@@ -7,6 +7,7 @@ import (
 //Reader interface
 type Reader interface {
 	Get(id entity.ID) (*entity.Pizza, error)
+	GetByName(name string) (*entity.Pizza, error)
 	List() ([]*entity.Pizza, error)
 }
 

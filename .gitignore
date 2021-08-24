@@ -26,6 +26,7 @@ _testmain.go
 
 # Enviroment
 .env
+.idea/*
 
 # cover
 coverage.out

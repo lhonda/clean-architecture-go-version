@@ -7,11 +7,9 @@ import (
 )
 
 func TestCreateNewPizza(t *testing.T) {
-	queijo, _ := NewIngredient("queijo")
-	calabreza, _ := NewIngredient("calabreza")
 
-	ingredients := []Ingredient{*queijo, *calabreza}
-	pizza, _ := NewPizza(ingredients)
+	ingredients := []Ingredient{"queijo", "calabreza"}
+	pizza, _ := NewPizza("queijo", ingredients, NewID())
 
 	pizzas := []Pizza{*pizza}
 	order, err := NewOrder("Jukinha", pizzas)
@@ -23,11 +21,8 @@ func TestCreateNewPizza(t *testing.T) {
 }
 
 func TestCreateNewPizzaWithEmptyCustomerShouldFail(t *testing.T) {
-	queijo, _ := NewIngredient("queijo")
-	calabreza, _ := NewIngredient("calabreza")
-
-	ingredients := []Ingredient{*queijo, *calabreza}
-	pizza, _ := NewPizza(ingredients)
+	ingredients := []Ingredient{"queijo", "calabreza"}
+	pizza, _ := NewPizza("queijo", ingredients, NewID())
 
 	pizzas := []Pizza{*pizza}
 	o, err := NewOrder("", pizzas)
