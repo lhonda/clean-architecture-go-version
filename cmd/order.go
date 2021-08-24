@@ -3,12 +3,14 @@ package cmd
 import (
 	"database/sql"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/lhonda/clean-architecture-go-version/config"
 	"github.com/lhonda/clean-architecture-go-version/entity"
 	"github.com/lhonda/clean-architecture-go-version/infrastructure/repository"
 	"github.com/lhonda/clean-architecture-go-version/usecase/order"
 	"github.com/lhonda/clean-architecture-go-version/usecase/pizza"
 	"github.com/spf13/cobra"
+
 	"log"
 	"strings"
 )
@@ -31,11 +33,13 @@ var createOrder = &cobra.Command{
 
 		defer db.Close()
 
-		repo := repository.NewOrderMySQL(db)
+		orderRepo := repository.NewOrderMySQL(db)
 
-		orderService := order.NewService(repo)
+		orderService := order.NewService(orderRepo)
 
-		pizzaService := pizza.NewService(repo)
+		pizzaRepo := repository.NewPizzaMySQL(db)
+
+		pizzaService := pizza.NewService(pizzaRepo)
 
 		owner := args[0]
 		pizzaNames := args[1]
