@@ -19,11 +19,11 @@ func NewPizzaMySQL(db *sql.DB) *PizzaMySQL {
 }
 
 //Create a pizza
-func (r *PizzaMySQL) Create(e *entity.Pizza) (entity.ID, error) {
+func (r *PizzaMySQL) Create(e *entity.Pizza) (*entity.Pizza, error) {
 	stmt, err := r.db.Prepare(`insert into pizza (id, name ,ingredients, order_id, created_at) 
 		values(?,?,?,?)`)
 	if err != nil {
-		return e.ID, err
+		return nil, err
 	}
 	_, err = stmt.Exec(
 		e.ID,
@@ -32,13 +32,13 @@ func (r *PizzaMySQL) Create(e *entity.Pizza) (entity.ID, error) {
 		time.Now().Format("2006-01-02"),
 	)
 	if err != nil {
-		return e.ID, err
+		return e, err
 	}
 	err = stmt.Close()
 	if err != nil {
-		return e.ID, err
+		return nil, err
 	}
-	return e.ID, nil
+	return e, nil
 }
 
 //Get a pizza
