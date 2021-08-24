@@ -80,4 +80,6 @@ TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+insert into pizza(id,name, ingredients, order_id) values ("4c7966aa-33dd-4e5a-8038-46bd34d21e9f","queijo","queijo;molho","4c7966aa-33dd-4e5a-8038-46bd34d21e9d");
+insert into pizza(id,name, ingredients, order_id) values ("4c7966aa-33dd-3e5a-8038-46bd34d21e9f","presunto","presunto;molho","4c7966aa-33dd-4e5a-8038-46bd34d21e92");
 -- Dump completed on 2021-08-11 16:44:00
