@@ -30,12 +30,22 @@ func (r *InMem) Create(e *entity.Pizza) (*entity.Pizza, error) {
 	return e, nil
 }
 
-//Get an Pizza
+//Get a Pizza
 func (r *InMem) Get(id entity.ID) (*entity.Pizza, error) {
 	if r.m[id] == nil {
 		return nil, entity.NotFoundError
 	}
 	return r.m[id], nil
+}
+
+//GetByName an Pizza
+func (r *InMem) GetByName(name string) (*entity.Pizza, error) {
+	for _, p := range r.m {
+		if p.Name == name {
+			return p,nil
+		}
+	}
+	return nil, entity.NotFoundError
 }
 
 //List Pizzas

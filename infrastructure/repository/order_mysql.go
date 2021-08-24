@@ -48,7 +48,7 @@ func (r *OrderMySQL) Create(e *entity.Order) (*entity.Order, error) {
 
 	err = stmt.Close()
 	if err != nil {
-		return e, err
+		return nil, err
 	}
 	return e, nil
 }
