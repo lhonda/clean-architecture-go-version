@@ -87,12 +87,20 @@ func (r *PizzaMySQL) List() ([]*entity.Pizza, error) {
 		return nil, err
 	}
 	for rows.Next() {
-		var b entity.Pizza
-		err = rows.Scan(&b.ID, &b.Name, &b.Ingredients, &b.CreatedAt)
+		var p entity.Pizza
+		var ingredients *string
+		var ts *string = new(string)
+		err = rows.Scan(&p.ID, &p.Name, &ingredients,&p.Order, ts)
 		if err != nil {
 			return nil, err
 		}
-		pizzas = append(pizzas, &b)
+
+		if *ts != "" {
+			t, _ := time.Parse("2006-01-02T15:04:05Z", *ts)
+			p.CreatedAt = t
+		}
+		p.Ingredients = []entity.Ingredient{entity.Ingredient(*ingredients)}
+		pizzas = append(pizzas, &p)
 	}
 	return pizzas, nil
 }

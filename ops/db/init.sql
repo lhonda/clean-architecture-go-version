@@ -16,15 +16,23 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `order`
+-- Table structure for table `orders`
 --
 
+
+use mysql;
+INSERT IGNORE INTO user (host, user, select_priv, insert_priv,update_priv, delete_priv) VALUES ('%', 'clean_architecture_go_version','Y','Y','Y','Y');
+commit;
+SET PASSWORD for 'clean_architecture_go_version'@'%' =PASSWORD('clean_architecture_go_version');
+flush privileges;
+
+create database if not exists clean_architecture_go_version;
 use clean_architecture_go_version;
 
-DROP TABLE IF EXISTS `order`;
+DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `order`
+CREATE TABLE `orders`
 (
     `id`         varchar(32)  DEFAULT NULL,
     `owner`      varchar(255) DEFAULT NULL,
@@ -34,13 +42,13 @@ CREATE TABLE `order`
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `order`
+-- Dumping data for table `orders`
 --
 
 LOCK
-TABLES `order` WRITE;
-/*!40000 ALTER TABLE `order` DISABLE KEYS */;
-/*!40000 ALTER TABLE `order` ENABLE KEYS */;
+TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK
 TABLES;
 
@@ -82,6 +90,7 @@ TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-insert into pizza(id,name, ingredients, order_id) values ("4c7966aa33dd4e5a803846bd34d21e9f","queijo","queijo;molho","4c7966aa33dd4e5a803846bd34d21e9d");
-insert into pizza(id,name, ingredients, order_id) values ("4c7966aa33dd3e5a803846bd34d21e9f","presunto","presunto;molho","4c7966aa33dd4e5a803846bd34d21e92");
+insert into pizza(id,name, ingredients, order_id, created_at) values ("4c7966aa33dd4e5a803846bd34d21e9f","queijo","queijo;molho","4c7966aa33dd4e5a803846bd34d21e9d",now());
+insert into pizza(id,name, ingredients, order_id, created_at) values ("4c7966aa33dd3e5a803846bd34d21e9f","presunto","presunto;molho","4c7966aa33dd4e5a803846bd34d21e92",now());
+#GRANT ALL PRIVILEGES ON *.* TO '*'@'%' WITH GRANT OPTION;
 -- Dump completed on 2021-08-11 16:44:00

@@ -24,7 +24,7 @@ var createOrder = &cobra.Command{
 	Use:   "create-order owner=<Guido> pizzas=peperoni,cheese",
 	Short: "Create a new Pizza order",
 	Run: func(cmd *cobra.Command, args []string) {
-		dataSourceName := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?parseTime=true", config.DB_USER, config.DB_PASSWORD, config.DB_HOST, config.DB_DATABASE)
+		dataSourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true", config.DB_USER, config.DB_PASSWORD, config.DB_HOST, config.DB_DATABASE)
 		db, err := sql.Open("mysql", dataSourceName)
 
 		if err != nil {
@@ -46,7 +46,7 @@ var createOrder = &cobra.Command{
 		ps := strings.Split(pizzaNames, "=")
 		var pizzas []entity.Pizza
 
-		for _, p := range ps {
+		for _, p := range strings.Split(ps[1],",") {
 			pizza, _ := pizzaService.GetPizzaByName(p)
 			pizzas = append(pizzas, *pizza)
 		}

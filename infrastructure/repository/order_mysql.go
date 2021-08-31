@@ -19,7 +19,7 @@ func NewOrderMySQL(db *sql.DB) *OrderMySQL {
 
 //Create an order
 func (r *OrderMySQL) Create(e *entity.Order) (*entity.Order, error) {
-	stmt, err := r.db.Prepare(`insert into order (id, owner, created_at) 
+	stmt, err := r.db.Prepare(`insert into orders (id, owner, created_at) 
 		values(?,?,?)`)
 	if err != nil {
 		return nil, err
@@ -41,7 +41,7 @@ func (r *OrderMySQL) Create(e *entity.Order) (*entity.Order, error) {
 			p.ID,
 			p.Name,
 			p.Ingredients,
-			p.Order.ID,
+			e.ID,
 			p.CreatedAt,
 		)
 	}
@@ -55,7 +55,7 @@ func (r *OrderMySQL) Create(e *entity.Order) (*entity.Order, error) {
 
 //Get an order
 func (r *OrderMySQL) Get(id entity.ID) (*entity.Order, error) {
-	stmt, err := r.db.Prepare(`select id,owner , created_at from order where id = ?`)
+	stmt, err := r.db.Prepare(`select id,owner , created_at from orders where id = ?`)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ func (r *OrderMySQL) Get(id entity.ID) (*entity.Order, error) {
 
 //List orders
 func (r *OrderMySQL) List() ([]*entity.Order, error) {
-	stmt, err := r.db.Prepare(`select id, owner, created_at from order`)
+	stmt, err := r.db.Prepare(`select id, owner, created_at from orders`)
 	if err != nil {
 		return nil, err
 	}
@@ -113,7 +113,7 @@ func (r *OrderMySQL) List() ([]*entity.Order, error) {
 
 //Delete an order
 func (r *OrderMySQL) Delete(id entity.ID) error {
-	_, err := r.db.Exec("delete from order where id = ?", id)
+	_, err := r.db.Exec("delete from orders where id = ?", id)
 	if err != nil {
 		return err
 	}
