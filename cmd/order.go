@@ -41,12 +41,10 @@ var createOrder = &cobra.Command{
 
 		pizzaService := pizza.NewService(pizzaRepo)
 
-		owner := args[0]
-		pizzaNames := args[1]
-		ps := strings.Split(pizzaNames, "=")
+		ps := strings.Split(pizzas, "=")
 		var pizzas []entity.Pizza
 
-		for _, p := range strings.Split(ps[1],",") {
+		for _, p := range strings.Split(ps[0],",") {
 			pizza, _ := pizzaService.GetPizzaByName(p)
 			pizzas = append(pizzas, *pizza)
 		}
@@ -60,7 +58,9 @@ var createOrder = &cobra.Command{
 }
 
 func init() {
-	createOrder.PersistentFlags().StringVar(&owner, "owner", "Guido", "")
-	createOrder.PersistentFlags().StringVar(&pizzas, "pizzas", "queijo", "pizzas")
+	createOrder.Flags().StringVar(&owner, "owner", "Guido", "")
+	createOrder.Flags().StringVar(&pizzas, "pizzas", "queijo", "pizzas")
+	createOrder.MarkFlagRequired("owner")
+	createOrder.MarkFlagRequired("pizzas")
 	RootCmd.AddCommand(createOrder)
 }
