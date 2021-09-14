@@ -31,7 +31,8 @@ func (r *OrderMySQL) Create(e *entity.Order) (*entity.Order, error) {
 	// Defer a rollback in case anything fails.
 	defer tx.Rollback()
 
-	_ , err = tx.ExecContext(ctx, `insert into orders (id, owner, created_at) values(?,?,?)`,
+	_, _ = tx.Exec("SET sql_mode ='' ;")
+	_, err = tx.ExecContext(ctx, `insert into orders (id, owner, created_at) values(?,?,?)`,
 		e.ID,
 		e.Owner,
 		e.CreatedAt,
