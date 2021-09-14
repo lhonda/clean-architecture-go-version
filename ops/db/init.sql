@@ -92,5 +92,5 @@ TABLES;
 
 insert into pizza(id,name, ingredients, order_id, created_at) values ("4c7966aa33dd4e5a803846bd34d21e9f","queijo","queijo;molho","4c7966aa33dd4e5a803846bd34d21e9d",now());
 insert into pizza(id,name, ingredients, order_id, created_at) values ("4c7966aa33dd3e5a803846bd34d21e9f","presunto","presunto;molho","4c7966aa33dd4e5a803846bd34d21e92",now());
-#GRANT ALL PRIVILEGES ON *.* TO '*'@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO '*'@'%' WITH GRANT OPTION;
 -- Dump completed on 2021-08-11 16:44:00

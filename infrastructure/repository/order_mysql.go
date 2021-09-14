@@ -1,8 +1,10 @@
 package repository
 
 import (
+	"context"
 	"database/sql"
 	"github.com/lhonda/clean-architecture-go-version/entity"
+	"time"
 )
 
 //OrderMySQL mysql repo
@@ -19,25 +21,30 @@ func NewOrderMySQL(db *sql.DB) *OrderMySQL {
 
 //Create an order
 func (r *OrderMySQL) Create(e *entity.Order) (*entity.Order, error) {
-	stmt, err := r.db.Prepare(`insert into orders (id, owner, created_at) 
-		values(?,?,?)`)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	tx, err := r.db.BeginTx(ctx, nil)
 	if err != nil {
 		return nil, err
 	}
-	_, err = stmt.Exec(
+	// Defer a rollback in case anything fails.
+	defer tx.Rollback()
+
+	_, _ = tx.Exec("SET sql_mode ='' ;")
+	_, err = tx.ExecContext(ctx, `insert into orders (id, owner, created_at) values(?,?,?)`,
 		e.ID,
 		e.Owner,
 		e.CreatedAt,
 	)
 
 	// insert Pizza IDs into relation table
-	stmt, err = r.db.Prepare(`insert into pizza (id, name, ingredients, order_id, created_at) values(?,?,?,?,?)`)
 	if err != nil {
 		return nil, err
 	}
 
 	for _, p := range e.Pizzas {
-		_, err = stmt.Exec(
+		_, err = tx.ExecContext(ctx, `insert into pizza (id, name, ingredients, order_id, created_at) values(?,?,?,?,?)`,
 			p.ID,
 			p.Name,
 			p.Ingredients,
@@ -46,8 +53,7 @@ func (r *OrderMySQL) Create(e *entity.Order) (*entity.Order, error) {
 		)
 	}
 
-	err = stmt.Close()
-	if err != nil {
+	if err = tx.Commit(); err != nil {
 		return nil, err
 	}
 	return e, nil
