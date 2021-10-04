@@ -15,7 +15,7 @@ func TestCreatePizza(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
 	ingredients := newFixtureIngredients()
-	o, err := m.CreatePizza("queijo", ingredients, entity.NewID())
+	o, err := m.CreatePizza("queijo", ingredients)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, o)
@@ -24,7 +24,7 @@ func TestCreatePizza(t *testing.T) {
 func TestCreatePizzaWithEmptyIngredientsShouldFail(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
-	_, err := m.CreatePizza("queijo", nil, entity.NewID())
+	_, err := m.CreatePizza("queijo", nil)
 
 	assert.NotNil(t, err)
 	assert.EqualError(t, err, "Empty ingredients list")
@@ -35,8 +35,8 @@ func TestListPizzas(t *testing.T) {
 	m := NewService(repo)
 	ingredients := newFixtureIngredients()
 
-	u1, _ := m.CreatePizza("queijo", ingredients, entity.NewID())
-	u2, _ := m.CreatePizza("queijo", ingredients, entity.NewID())
+	u1, _ := m.CreatePizza("queijo", ingredients)
+	u2, _ := m.CreatePizza("queijo", ingredients)
 
 	t.Run("list all", func(t *testing.T) {
 		all, err := m.ListPizzas()
@@ -52,7 +52,7 @@ func TestGetPizza(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
 	ingredients := newFixtureIngredients()
-	o, _ := m.CreatePizza("queijo", ingredients, entity.NewID())
+	o, _ := m.CreatePizza("queijo", ingredients)
 
 	saved, _ := m.GetPizza(o.ID)
 
@@ -65,7 +65,7 @@ func TestDeletePizza(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
 	ingredients := newFixtureIngredients()
-	o, _ := m.CreatePizza("queijo", ingredients, entity.NewID())
+	o, _ := m.CreatePizza("queijo", ingredients)
 
 	err := m.DeletePizza(o.ID)
 

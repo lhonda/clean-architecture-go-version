@@ -90,7 +90,7 @@ func (r *PizzaMySQL) List() ([]*entity.Pizza, error) {
 		var p entity.Pizza
 		var ingredients *string
 		var ts *string = new(string)
-		err = rows.Scan(&p.ID, &p.Name, &ingredients,&p.Order, ts)
+		err = rows.Scan(&p.ID, &p.Name, &ingredients, ts)
 		if err != nil {
 			return nil, err
 		}

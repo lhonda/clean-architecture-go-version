@@ -9,8 +9,8 @@ import (
 )
 
 func newFixturePizza() []entity.Pizza {
-	p, _ := entity.NewPizza("queijo", []entity.Ingredient{"ham", "cheese"}, entity.NewID())
-	p2, _ := entity.NewPizza("ham", []entity.Ingredient{"cheese"}, entity.NewID())
+	p, _ := entity.NewPizza("queijo", []entity.Ingredient{"ham", "cheese"})
+	p2, _ := entity.NewPizza("ham", []entity.Ingredient{"cheese"})
 
 	return []entity.Pizza{*p, *p2}
 }

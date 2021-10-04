@@ -32,25 +32,16 @@ func (r *OrderMySQL) Create(e *entity.Order) (*entity.Order, error) {
 	defer tx.Rollback()
 
 	_, _ = tx.Exec("SET sql_mode ='' ;")
-	_, err = tx.ExecContext(ctx, `insert into orders (id, owner, created_at) values(?,?,?)`,
+	_, err = tx.ExecContext(ctx, `insert into orders (id, owner,pizzas, created_at) values(?,?,?,?)`,
 		e.ID,
 		e.Owner,
+		e.Pizzas,
 		e.CreatedAt,
 	)
 
 	// insert Pizza IDs into relation table
 	if err != nil {
 		return nil, err
-	}
-
-	for _, p := range e.Pizzas {
-		_, err = tx.ExecContext(ctx, `insert into pizza (id, name, ingredients, order_id, created_at) values(?,?,?,?,?)`,
-			p.ID,
-			p.Name,
-			p.Ingredients,
-			e.ID,
-			p.CreatedAt,
-		)
 	}
 
 	if err = tx.Commit(); err != nil {
@@ -61,7 +52,7 @@ func (r *OrderMySQL) Create(e *entity.Order) (*entity.Order, error) {
 
 //Get an order
 func (r *OrderMySQL) Get(id entity.ID) (*entity.Order, error) {
-	stmt, err := r.db.Prepare(`select id,owner , created_at from orders where id = ?`)
+	stmt, err := r.db.Prepare(`select id,owner, pizzas, created_at from orders where id = ?`)
 	if err != nil {
 		return nil, err
 	}
@@ -71,33 +62,15 @@ func (r *OrderMySQL) Get(id entity.ID) (*entity.Order, error) {
 		return nil, err
 	}
 	for rows.Next() {
-		err = rows.Scan(&b.ID, &b.Owner, &b.CreatedAt)
+		err = rows.Scan(&b.ID, &b.Owner,&b.Pizzas, &b.CreatedAt)
 	}
 
-	stmt, err = r.db.Prepare(`select id,name, ingredients, order_id, created_at from pizza where order_id = ?`)
-	if err != nil {
-		return nil, err
-	}
-
-	rows, err = stmt.Query(id)
-	if err != nil {
-		return nil, err
-	}
-
-	var pizzas []entity.Pizza
-	for rows.Next() {
-		p := entity.Pizza{}
-		err = rows.Scan(&p.ID, &p.Name, &p.Ingredients, &p.CreatedAt)
-		pizzas = append(pizzas, p)
-	}
-
-	b.Pizzas = pizzas
 	return &b, nil
 }
 
 //List orders
 func (r *OrderMySQL) List() ([]*entity.Order, error) {
-	stmt, err := r.db.Prepare(`select id, owner, created_at from orders`)
+	stmt, err := r.db.Prepare(`select id, owner,pizzas, created_at from orders`)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +81,7 @@ func (r *OrderMySQL) List() ([]*entity.Order, error) {
 	}
 	for rows.Next() {
 		var b entity.Order
-		err = rows.Scan(&b.ID, &b.Owner, &b.CreatedAt)
+		err = rows.Scan(&b.ID, &b.Owner,&b.Pizzas, &b.CreatedAt)
 		if err != nil {
 			return nil, err
 		}
@@ -120,11 +93,6 @@ func (r *OrderMySQL) List() ([]*entity.Order, error) {
 //Delete an order
 func (r *OrderMySQL) Delete(id entity.ID) error {
 	_, err := r.db.Exec("delete from orders where id = ?", id)
-	if err != nil {
-		return err
-	}
-	// TODO: setup delete cascade on init.sql
-	_, err = r.db.Exec("delete from pizza where order_id = ?", id)
 	if err != nil {
 		return err
 	}

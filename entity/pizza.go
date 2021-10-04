@@ -10,12 +10,11 @@ type Pizza struct {
 	ID          ID
 	Name        string
 	Ingredients []Ingredient
-	Order       ID
 	CreatedAt   time.Time
 }
 
 //NewPizza create a new pizza
-func NewPizza(name string, ingredients []Ingredient, orderId ID) (*Pizza, error) {
+func NewPizza(name string, ingredients []Ingredient) (*Pizza, error) {
 	if ingredients == nil {
 		return nil, EmptyIngredientsListError
 	}
@@ -24,7 +23,6 @@ func NewPizza(name string, ingredients []Ingredient, orderId ID) (*Pizza, error)
 		ID:          NewID(),
 		Name:        name,
 		Ingredients: ingredients,
-		Order:       orderId,
 		CreatedAt:   time.Now(),
 	}
 	return p, nil

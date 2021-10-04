@@ -17,8 +17,8 @@ func NewService(r Repository) *Service {
 }
 
 //CreatePizza Create a Pizza
-func (s *Service) CreatePizza(name string, ingredients []entity.Ingredient, orderId entity.ID) (*entity.Pizza, error) {
-	e, err := entity.NewPizza(name, ingredients, orderId)
+func (s *Service) CreatePizza(name string, ingredients []entity.Ingredient) (*entity.Pizza, error) {
+	e, err := entity.NewPizza(name, ingredients)
 	if err != nil {
 		return nil, err
 	}

@@ -144,20 +144,19 @@ Gera relatório de code coverage:
 
 ## Comentários
 
-Isolar o domínio em outro projeto de modo que a camada de API/cmd importa e usa o domínio.
+Nesta sessão listamos os tópicos interessantes do uso de Clean Architecture nos nossos projetos.
 
-Adicionar o Swagger/Open API.
+Existe a possibilidade de isolar o domínio em um projeto; deste modo a camada de API/cmd pode importar e usar o domínio.
 
-Adicionar gitlab/github badges.
+Podemos dicionar o Swagger/Open API, gitlab/github badges.
 
-Modelar sistemas no Go é trabalhoso.
+Constatamos que modelar sistemas em Go é trabalhoso no início do proejto.
 
-Lib Testify ajuda na leitura dos testes.
+A lib Testify ajuda na leitura dos testes.
 
 ## Referências:
 
 - https://github.com/eminetto/clean-architecture-go-v2.
 
--
+- https://www.youtube.com/watch?v=M0ODYSahNq8
 
--
