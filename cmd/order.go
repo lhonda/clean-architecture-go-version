@@ -44,7 +44,7 @@ var createOrder = &cobra.Command{
 		ps := strings.Split(pizzas, "=")
 		var pizzas []entity.Pizza
 
-		for _, p := range strings.Split(ps[0],",") {
+		for _, p := range strings.Split(ps[0], ",") {
 			pizza, _ := pizzaService.GetPizzaByName(p)
 			pizzas = append(pizzas, *pizza)
 		}

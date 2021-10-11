@@ -35,7 +35,7 @@ var listPizzas = &cobra.Command{
 		}
 
 		for i, p := range pizzas {
-			fmt.Println(i, ")", p.Name,",created at:", p.CreatedAt)
+			fmt.Println(i, ")", p.Name, ",created at:", p.CreatedAt)
 		}
 	},
 }
