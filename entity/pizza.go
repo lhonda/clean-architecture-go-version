@@ -15,7 +15,7 @@ type Pizza struct {
 
 //NewPizza create a new pizza
 func NewPizza(name string, ingredients []Ingredient) (*Pizza, error) {
-	if ingredients == nil {
+	if len(ingredients) == 0 {
 		return nil, EmptyIngredientsListError
 	}
 
@@ -40,6 +40,7 @@ func (p *Pizza) GetIngredientsAsString() string {
 
 // SetIngredientsAsList function
 func (p *Pizza) SetIngredientsAsList(ingredients string) *Pizza {
+	p.Ingredients = []Ingredient{}
 	for _, ingredient := range strings.Split(ingredients, ";") {
 		p.Ingredients = append(p.Ingredients, Ingredient(ingredient))
 	}

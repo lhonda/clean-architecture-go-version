@@ -24,7 +24,7 @@ func inMem() *InMem {
 	}
 }
 
-//Create an Pizza
+//Create a Pizza
 func (r *InMem) Create(e *entity.Pizza) (*entity.Pizza, error) {
 	r.m[e.ID] = e
 	return e, nil
@@ -38,7 +38,7 @@ func (r *InMem) Get(id entity.ID) (*entity.Pizza, error) {
 	return r.m[id], nil
 }
 
-//GetByName an Pizza
+//GetByName a Pizza
 func (r *InMem) GetByName(name string) (*entity.Pizza, error) {
 	for _, p := range r.m {
 		if p.Name == name {

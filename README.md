@@ -146,17 +146,22 @@ Gera relatório de code coverage:
 
 Nesta sessão listamos os tópicos interessantes do uso de Clean Architecture nos nossos projetos.
 
-Existe a possibilidade de isolar o domínio em um projeto; deste modo a camada de API/cmd pode importar e usar o domínio.
+1.Existe a possibilidade de isolar o domínio em um projeto; deste modo a camada de API/cmd pode importar e usar o domínio.
 
-Podemos dicionar o Swagger/Open API, gitlab/github badges.
+2.Podemos adicionar o Swagger/Open API, gitlab/github badges.
 
-Constatamos que modelar sistemas em Go é trabalhoso no início do proejto.
+3.Constatamos que modelar sistemas em Go é trabalhoso no início do projeto.
 
-A lib Testify ajuda na leitura dos testes.
+4.A lib Testify ajuda na leitura dos testes.
+
+5.Fizemos reuniões semanais de uma hora. Começamos pelas entidades, use cases, persistência e camadas externas. Todas as camadas tem testes de unidade.
+
+6.A codificação foi feita em grupo, houve troca de experiência, resolução de bugs, discussão da arquitetura. A discussão em grupo e o compartilhamento de experiência foi importante pois acreditamos que pair programming aumenta a qualidade do código e difunde a cultura interna do projeto entre os membros do time.
+
+
 
 ## Referências:
 
 - https://github.com/eminetto/clean-architecture-go-v2.
 
 - https://www.youtube.com/watch?v=M0ODYSahNq8
-

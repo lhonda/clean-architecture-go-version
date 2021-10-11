@@ -1,6 +1,7 @@
 package pizza
 
 import (
+	"github.com/google/uuid"
 	"github.com/lhonda/clean-architecture-go-version/entity"
 	"testing"
 
@@ -61,6 +62,32 @@ func TestGetPizza(t *testing.T) {
 	assert.NotNil(t, saved.Ingredients)
 }
 
+func TestGetPizzaName(t *testing.T) {
+	repo := inMem()
+	m := NewService(repo)
+	ingredients := newFixtureIngredients()
+	o, _ := m.CreatePizza("queijo", ingredients)
+
+	saved, _ := m.GetPizzaByName("queijo")
+
+	assert.Equal(t, saved.ID, o.ID)
+	assert.NotNil(t, saved.CreatedAt)
+	assert.NotNil(t, saved.Ingredients)
+}
+
+func TestGetPizzaWithNonExistentPizzaShouldFail(t *testing.T) {
+	repo := inMem()
+	m := NewService(repo)
+	_, err := m.GetPizza(uuid.New())
+
+	assert.NotNil(t, err)
+
+	_, err = m.GetPizzaByName("azeitona")
+
+	assert.NotNil(t, err)
+
+}
+
 func TestDeletePizza(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
@@ -75,7 +102,7 @@ func TestDeletePizza(t *testing.T) {
 	assert.Equal(t, 0, len(all))
 }
 
-func TestDeletepizzaWithNonExistingpizzaShouldFail(t *testing.T) {
+func TestDeletePizzaWithNonExistingPizzaShouldFail(t *testing.T) {
 	repo := inMem()
 	m := NewService(repo)
 	nonExistentID := entity.NewID()

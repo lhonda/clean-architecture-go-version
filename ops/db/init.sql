@@ -90,7 +90,7 @@ TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-insert into pizza(id,name, ingredients, order_id, created_at) values ("4c7966aa33dd4e5a803846bd34d21e9f","queijo","queijo;molho",now());
-insert into pizza(id,name, ingredients, order_id, created_at) values ("4c7966aa33dd3e5a803846bd34d21e9f","presunto","presunto;molho",now());
+insert into pizza(id,name, ingredients, created_at) values ("4c7966aa33dd4e5a803846bd34d21e9f","queijo","queijo;molho",now());
+insert into pizza(id,name, ingredients, created_at) values ("4c7966aa33dd3e5a803846bd34d21e9f","presunto","presunto;molho",now());
 GRANT ALL PRIVILEGES ON *.* TO '*'@'%' WITH GRANT OPTION;
 -- Dump completed on 2021-08-11 16:44:00

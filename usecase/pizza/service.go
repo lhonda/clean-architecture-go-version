@@ -42,10 +42,5 @@ func (s *Service) ListPizzas() ([]*entity.Pizza, error) {
 
 //DeletePizza Delete an Pizza
 func (s *Service) DeletePizza(id entity.ID) error {
-	_, err := s.GetPizza(id)
-	if err != nil {
-		return entity.NotFoundError
-	}
-
 	return s.repo.Delete(id)
 }

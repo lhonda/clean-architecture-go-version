@@ -1,6 +1,7 @@
 package order
 
 import (
+	"github.com/google/uuid"
 	"testing"
 
 	"github.com/lhonda/clean-architecture-go-version/entity"
@@ -63,6 +64,14 @@ func TestGetOrder(t *testing.T) {
 	assert.Equal(t, saved.Owner, o.Owner)
 	assert.NotNil(t, saved.Pizzas)
 	assert.Equal(t, saved.Owner, o.Owner)
+}
+
+func TestGetOrderWithNonExistentOrderShouldFail(t *testing.T) {
+	repo := inMem()
+	m := NewService(repo)
+	_, err := m.GetOrder(uuid.New())
+
+	assert.NotNil(t, err)
 }
 
 func TestDeleteOrder(t *testing.T) {

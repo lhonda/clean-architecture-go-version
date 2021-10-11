@@ -37,10 +37,5 @@ func (s *Service) ListOrders() ([]*entity.Order, error) {
 
 //DeleteOrder Delete an Order
 func (s *Service) DeleteOrder(id entity.ID) error {
-	_, err := s.GetOrder(id)
-	if err != nil {
-		return entity.NotFoundError
-	}
-
 	return s.repo.Delete(id)
 }
