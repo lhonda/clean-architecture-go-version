@@ -37,15 +37,17 @@ func TestListPizzas(t *testing.T) {
 	ingredients := newFixtureIngredients()
 
 	u1, _ := m.CreatePizza("queijo", ingredients)
-	u2, _ := m.CreatePizza("queijo", ingredients)
+	u2, _ := m.CreatePizza("presunto", ingredients)
 
 	t.Run("list all", func(t *testing.T) {
 		all, err := m.ListPizzas()
 
 		assert.Nil(t, err)
 		assert.Equal(t, 2, len(all))
-		assert.Equal(t, u1.ID, all[0].ID)
-		assert.Equal(t, u2.ID, all[1].ID)
+
+		ids := []uuid.UUID{all[0].ID, all[1].ID}
+		assert.Contains(t, ids, u1.ID)
+		assert.Contains(t, ids, u2.ID)
 	})
 }
 
