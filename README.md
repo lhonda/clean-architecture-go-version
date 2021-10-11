@@ -1,5 +1,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/lhonda/clean-architecture-go-version)](https://goreportcard.com/report/github.com/lhonda/clean-architecture-go-version)
 
+[![codecov](https://codecov.io/gh/lhonda/clean-architecture-go-version/branch/main/graph/badge.svg?token=97WP1O81QM)](https://codecov.io/gh/lhonda/clean-architecture-go-version)
+
 # clean-architecture-go-version
 
 ## Objetivo:
