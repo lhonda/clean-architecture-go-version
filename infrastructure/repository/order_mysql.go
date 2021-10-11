@@ -62,7 +62,7 @@ func (r *OrderMySQL) Get(id entity.ID) (*entity.Order, error) {
 		return nil, err
 	}
 	for rows.Next() {
-		err = rows.Scan(&b.ID, &b.Owner, &b.Pizzas, &b.CreatedAt)
+		rows.Scan(&b.ID, &b.Owner, &b.Pizzas, &b.CreatedAt)
 	}
 
 	return &b, nil

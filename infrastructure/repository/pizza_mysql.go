@@ -53,7 +53,7 @@ func (r *PizzaMySQL) Get(id entity.ID) (*entity.Pizza, error) {
 		return nil, err
 	}
 	for rows.Next() {
-		err = rows.Scan(&b.ID, &b.Name, &b.Ingredients, &b.CreatedAt)
+		rows.Scan(&b.ID, &b.Name, &b.Ingredients, &b.CreatedAt)
 	}
 	return &b, nil
 }
@@ -70,7 +70,7 @@ func (r *PizzaMySQL) GetByName(name string) (*entity.Pizza, error) {
 		return nil, err
 	}
 	for rows.Next() {
-		err = rows.Scan(&b.ID, &b.Name, &b.Ingredients, &b.CreatedAt)
+		rows.Scan(&b.ID, &b.Name, &b.Ingredients, &b.CreatedAt)
 	}
 	return &b, nil
 }
