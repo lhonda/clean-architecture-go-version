@@ -3,7 +3,7 @@ package cmd
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"  // load mysql driver
+	_ "github.com/go-sql-driver/mysql" // load mysql driver
 	"github.com/lhonda/clean-architecture-go-version/config"
 	"github.com/lhonda/clean-architecture-go-version/entity"
 	"github.com/lhonda/clean-architecture-go-version/infrastructure/repository"

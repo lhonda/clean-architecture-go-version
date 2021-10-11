@@ -15,7 +15,7 @@ var (
 		Long:  `cli version to set your order and list.`,
 	}
 
-	DbUser     string
+	DbUser         string
 	DbPassword     string
 	DbHost         string
 	dataSourceName string
