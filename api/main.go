@@ -15,7 +15,7 @@ import (
 )
 
 func listPizzas(c *fiber.Ctx) error {
-	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?parseTime=true", config.DB_USER, config.DB_PASSWORD, config.DB_HOST, config.DB_DATABASE)
+	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?parseTime=true", config.DbUser, config.DbPassword, config.DbHost, config.DbDatabase)
 	db, err := sql.Open("mysql", dataSourceName)
 
 	if err != nil {
@@ -36,7 +36,7 @@ func listPizzas(c *fiber.Ctx) error {
 }
 
 func createOrder(c *fiber.Ctx) error {
-	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true", config.DB_USER, config.DB_PASSWORD, config.DB_HOST, config.DB_DATABASE)
+	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true", config.DbUser, config.DbPassword, config.DbHost, config.DbDatabase)
 	db, err := sql.Open("mysql", dataSourceName)
 
 	if err != nil {

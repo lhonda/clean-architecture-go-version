@@ -14,7 +14,7 @@ type Order struct {
 func NewOrder(owner string, pizzas []Pizza) (*Order, error) {
 
 	if owner == "" {
-		return nil, EmptyOwnerError
+		return nil, ErrEmptyOwner
 	}
 
 	return &Order{

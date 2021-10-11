@@ -16,7 +16,7 @@ type Pizza struct {
 //NewPizza create a new pizza
 func NewPizza(name string, ingredients []Ingredient) (*Pizza, error) {
 	if len(ingredients) == 0 {
-		return nil, EmptyIngredientsListError
+		return nil, ErrEmptyIngredientsList
 	}
 
 	p := &Pizza{

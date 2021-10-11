@@ -15,16 +15,17 @@ var (
 		Long:  `cli version to set your order and list.`,
 	}
 
-	DB_USER        string
-	DB_PASSWORD    string
-	DB_HOST        string
+	DbUser     string
+	DbPassword     string
+	DbHost         string
 	dataSourceName string
 )
 
 func init() {
-	dataSourceName = fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?parseTime=true", DB_USER, DB_PASSWORD, DB_HOST, "clean_arch")
+	dataSourceName = fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?parseTime=true", DbUser, DbPassword, DbHost, "clean_arch")
 }
 
+// Execute function
 func Execute() {
 	if err := RootCmd.Execute(); err != nil {
 		fmt.Println(err)

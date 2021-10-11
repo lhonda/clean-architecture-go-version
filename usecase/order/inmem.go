@@ -9,6 +9,8 @@ import (
 type InMem struct {
 	m map[entity.ID]*entity.Order
 }
+
+// ByCreatedAt struct used by Sort function
 type ByCreatedAt []*entity.Order
 
 func (a ByCreatedAt) Len() int           { return len(a) }
@@ -32,7 +34,7 @@ func (r *InMem) Create(e *entity.Order) (*entity.Order, error) {
 //Get an order
 func (r *InMem) Get(id entity.ID) (*entity.Order, error) {
 	if r.m[id] == nil {
-		return nil, entity.NotFoundError
+		return nil, entity.ErrNotFound
 	}
 	return r.m[id], nil
 }
@@ -54,5 +56,5 @@ func (r *InMem) Delete(id entity.ID) error {
 		delete(r.m, id)
 		return nil
 	}
-	return entity.NotFoundError
+	return entity.ErrNotFound
 }

@@ -3,7 +3,7 @@ package cmd
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"  // load mysql driver
 	"github.com/lhonda/clean-architecture-go-version/config"
 	"github.com/lhonda/clean-architecture-go-version/entity"
 	"github.com/lhonda/clean-architecture-go-version/infrastructure/repository"
@@ -24,7 +24,7 @@ var createOrder = &cobra.Command{
 	Use:   "create-order owner=<Guido> pizzas=peperoni,cheese",
 	Short: "Create a new Pizza order",
 	Run: func(cmd *cobra.Command, args []string) {
-		dataSourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true", config.DB_USER, config.DB_PASSWORD, config.DB_HOST, config.DB_DATABASE)
+		dataSourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true", config.DbUser, config.DbPassword, config.DbHost, config.DbDatabase)
 		db, err := sql.Open("mysql", dataSourceName)
 
 		if err != nil {

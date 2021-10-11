@@ -1,9 +1,14 @@
 package config
 
 const (
-	DB_USER     = "clean_architecture_go_version"
-	DB_PASSWORD = "clean_architecture_go_version"
-	DB_DATABASE = "clean_architecture_go_version"
-	DB_HOST     = "127.0.0.1"
-	API_PORT    = 8080
+	// DbUser db user
+	DbUser = "clean_architecture_go_version"
+	// DbPassword db password
+	DbPassword = "clean_architecture_go_version"
+	// DbDatabase database name
+	DbDatabase = "clean_architecture_go_version"
+	// DbHost database host
+	DbHost = "127.0.0.1"
+	// APIPort API port number
+	APIPort = 8080
 )

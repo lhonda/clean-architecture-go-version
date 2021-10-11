@@ -26,7 +26,7 @@ func TestEmptyIngredients(t *testing.T) {
 	p, err := NewPizza("queijo", []Ingredient{})
 
 	assert.Nil(t, p)
-	assert.ErrorIs(t, err, EmptyIngredientsListError)
+	assert.ErrorIs(t, err, ErrEmptyIngredientsList)
 }
 
 func TestGetSetIngredients(t *testing.T) {
