@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"github.com/lhonda/clean-architecture-go-version/entity"
+	"strings"
 	"time"
 )
 
@@ -31,11 +32,16 @@ func (r *OrderMySQL) Create(e *entity.Order) (*entity.Order, error) {
 	// Defer a rollback in case anything fails.
 	defer tx.Rollback()
 
+	pizzas := make([]string, 3)
+	for _, p := range e.Pizzas {
+		pizzas = append(pizzas, p.Name)
+	}
+
 	_, _ = tx.Exec("SET sql_mode ='' ;")
 	_, err = tx.ExecContext(ctx, `insert into orders (id, owner,pizzas, created_at) values(?,?,?,?)`,
 		e.ID,
 		e.Owner,
-		e.Pizzas,
+		strings.Join(pizzas, ","),
 		e.CreatedAt,
 	)
 

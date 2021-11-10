@@ -19,13 +19,6 @@
 -- Table structure for table `orders`
 --
 
-
-use mysql;
-INSERT IGNORE INTO user (host, user, select_priv, insert_priv,update_priv, delete_priv) VALUES ('%', 'clean_architecture_go_version','Y','Y','Y','Y');
-commit;
-SET PASSWORD for 'clean_architecture_go_version'@'%' =PASSWORD('clean_architecture_go_version');
-flush privileges;
-
 create database if not exists clean_architecture_go_version;
 use clean_architecture_go_version;
 
